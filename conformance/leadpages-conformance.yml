@@ -1,0 +1,117 @@
+generated: '2026-08-12'
+method: searched
+source: https://leadpages.com/.well-known/oauth-authorization-server
+note: >-
+  Conformance is asserted from the provider's own discovery documents and documentation
+  only. There is no Leadpages OpenAPI to derive from, so no spec-shape inference was made.
+  Every "conforms: true" below is backed by a document fetched from a leadpages.com host.
+standards:
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: true
+  evidence: >-
+    Authorization-code flow with authorization, token and registration endpoints published
+    at https://leadpages.com/.well-known/oauth-authorization-server; documented as the
+    auth method for MCP and user-facing integrations.
+- id: rfc8414-oauth-authorization-server-metadata
+  name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: true
+  evidence: >-
+    https://leadpages.com/.well-known/oauth-authorization-server returns 200 with issuer,
+    authorization_endpoint, token_endpoint, registration_endpoint, response_types_supported,
+    grant_types_supported, code_challenge_methods_supported and scopes_supported.
+- id: rfc9728-oauth-protected-resource-metadata
+  name: OAuth 2.0 Protected Resource Metadata (RFC 9728)
+  conforms: true
+  evidence: >-
+    https://leadpages.com/.well-known/oauth-protected-resource returns 200 with resource,
+    authorization_servers, bearer_methods_supported and scopes_supported.
+  deviation: >-
+    The 401 responses from the MCP and A2A endpoints carry no WWW-Authenticate challenge
+    referencing the resource metadata, so a client cannot discover it from the error alone
+    as RFC 9728 intends.
+- id: rfc7636-pkce
+  name: Proof Key for Code Exchange (RFC 7636)
+  conforms: true
+  evidence: code_challenge_methods_supported = ["S256"]; docs state "OAuth 2.0 with PKCE".
+- id: rfc7591-dynamic-client-registration
+  name: OAuth 2.0 Dynamic Client Registration (RFC 7591)
+  conforms: true
+  evidence: registration_endpoint = https://leadpages.com/api/mcp/oauth/register
+- id: rfc6750-bearer-token
+  name: OAuth 2.0 Bearer Token Usage (RFC 6750)
+  conforms: true
+  evidence: >-
+    bearer_methods_supported = ["header"]; REST API documented as
+    "Authorization: Bearer lp_your_api_key".
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    Hosted HTTP MCP server at https://mcp.leadpages.com/mcp with 47 documented tools and
+    published client configurations for Claude, ChatGPT, Cursor and n8n. Live tools/list is
+    OAuth-gated (401), so protocol-version conformance was not independently verified.
+- id: a2a
+  name: Agent2Agent Protocol
+  conforms: true
+  version: 0.3.0
+  grade: near-conformant
+  evidence: >-
+    Agent card at https://leadpages.com/.well-known/agent-card.json — capabilities is an
+    object, protocolVersion is 0.3.0, skills is an array of five. Missing optional
+    preferredTransport. See a2a/leadpages-a2a.yml.
+- id: llmstxt
+  name: llms.txt
+  conforms: true
+  evidence: >-
+    https://leadpages.com/llms.txt returns 200 text/plain in llms.txt form (H1, blockquote
+    summary, sectioned link lists), plus a linked machine-readable /pricing.md.
+- id: rfc9116-security-txt
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404, although a disclosure program is published in HTML.
+- id: rfc9457-problem-details
+  name: Problem Details for HTTP APIs (RFC 9457)
+  conforms: false
+  evidence: >-
+    Observed error bodies are a flat {"error":"Unauthorized"} object with content-type
+    application/json, not application/problem+json.
+- id: openapi
+  name: OpenAPI
+  conforms: false
+  evidence: >-
+    No Leadpages OpenAPI is published. The spec served at https://leadpages.com/openapi.json
+    describes the sibling brand HTML Pub (servers[] = https://htmlpub.com) and is not a
+    Leadpages contract. See conventions/leadpages-conventions.yml.
+- id: asyncapi
+  name: AsyncAPI
+  conforms: false
+  evidence: Webhooks are advertised in prose; no AsyncAPI document is published.
+- id: rfc9727-api-catalog
+  name: API Catalog (RFC 9727)
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404.
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404; OAuth 2.0 only, no OIDC layer.
+compliance_programs:
+- {id: soc2-type-ii, status: in-progress, note: 'stated as actively pursued, NOT held', source: 'https://leadpages.com/security'}
+- {id: gdpr, status: claimed-compliant, source: 'https://leadpages.com/legal/gdpr'}
+summary:
+  conforms_count: 9
+  not_conforms_count: 6
+  strongest: >-
+    The OAuth/agent discovery stack is genuinely well built — RFC 8414, RFC 9728, PKCE and
+    dynamic client registration are all correctly published, which is rarer than an OpenAPI.
+  weakest: >-
+    No machine-readable API contract of any kind for the REST surface, and no security.txt.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://leadpages.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://leadpages.com/.well-known/agent-card.json', status: 200}
+  - {url: 'https://leadpages.com/llms.txt', status: 200}
+  - {url: 'https://leadpages.com/.well-known/security.txt', status: 404}
+  - {url: 'https://leadpages.com/.well-known/openid-configuration', status: 404}

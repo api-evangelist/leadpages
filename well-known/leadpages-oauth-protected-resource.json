@@ -1,0 +1,1 @@
+{"resource":"https://leadpages.com/mcp","authorization_servers":["https://leadpages.com"],"bearer_methods_supported":["header"],"scopes_supported":["pages:read","pages:write","sites:read","sites:write","blogs:read","blogs:write","funnels:read","agents:chat","agents:approve","ads:read","ads:write"]}

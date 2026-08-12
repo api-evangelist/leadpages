@@ -1,0 +1,88 @@
+generated: '2026-08-12'
+method: probed
+source: https://leadpages.com/.well-known/oauth-authorization-server
+docs: https://leadpages.com/developers/docs
+note: >-
+  Scopes are read from the provider's own RFC 8414 authorization-server metadata
+  and RFC 9728 protected-resource metadata, both served anonymously from
+  leadpages.com. This is a machine-readable first-party source, not a derivation
+  from an OpenAPI — Leadpages publishes no OpenAPI of its own (see
+  conventions/leadpages-conventions.yml). Descriptions for the three agent scopes
+  are quoted verbatim from the A2A agent card; the remaining eight scopes are
+  published as bare identifiers with no provider-supplied description, and none
+  has been invented here.
+schemes:
+- name: oauth2
+  source: https://leadpages.com/.well-known/oauth-authorization-server
+  issuer: https://leadpages.com
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://leadpages.com/api/mcp/oauth/authorize
+    tokenUrl: https://leadpages.com/api/mcp/oauth/token
+    registrationUrl: https://leadpages.com/api/mcp/oauth/register
+    code_challenge_methods: [S256]
+    grant_types: [authorization_code, refresh_token]
+    token_endpoint_auth_methods: [client_secret_post]
+protected_resource:
+  resource: https://leadpages.com/mcp
+  authorization_servers: [https://leadpages.com]
+  bearer_methods_supported: [header]
+scopes:
+- scope: pages:read
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: pages:write
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: sites:read
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: sites:write
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: blogs:read
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: blogs:write
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: funnels:read
+  description: Read funnels, metrics, and agent proposals
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource, agent-card]
+- scope: agents:chat
+  description: Converse with the agent team (spends org AI credits)
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource, agent-card]
+- scope: agents:approve
+  description: Approve/dismiss agent proposals (mutates live ad accounts)
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource, agent-card]
+- scope: ads:read
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+- scope: ads:write
+  description: null
+  flows: [authorizationCode]
+  sources: [oauth-authorization-server, oauth-protected-resource]
+summary:
+  scope_count: 11
+  pattern: "<resource>:<read|write> plus three agent-specific scopes"
+  resources: [pages, sites, blogs, funnels, ads, agents]
+  consent_note: >-
+    agents:approve is the only scope the provider explicitly flags as mutating
+    external state — the agent card says it "mutates live ad accounts" and requires
+    an explicit confirmation round-trip.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://leadpages.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://leadpages.com/.well-known/agent-card.json', status: 200}

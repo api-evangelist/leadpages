@@ -1,0 +1,72 @@
+generated: '2026-08-12'
+method: probed
+source: https://leadpages.com/.well-known/
+host: https://leadpages.com
+summary:
+  probed: 7
+  hits: 3
+  note: >-
+    Three real documents are served: RFC 8414 OAuth authorization-server metadata,
+    RFC 9728 OAuth protected-resource metadata, and an A2A agent card. No
+    security.txt and no api-catalog. The 404 responses return the site's HTML
+    404 page, not an empty body.
+documents:
+- path: /.well-known/oauth-authorization-server
+  standard: RFC 8414
+  status: 200
+  content_type: application/json
+  file: leadpages-oauth-authorization-server.json
+- path: /.well-known/oauth-protected-resource
+  standard: RFC 9728
+  status: 200
+  content_type: application/json
+  file: leadpages-oauth-protected-resource.json
+- path: /.well-known/agent-card.json
+  standard: A2A 1.0.0
+  status: 200
+  content_type: application/json
+  file: ../a2a/leadpages-agent-card.json
+  file_note: Stored once under a2a/ rather than duplicated here.
+  see_also: a2a/leadpages-a2a.yml
+- path: /.well-known/security.txt
+  standard: RFC 9116
+  status: 404
+  note: >-
+    Not served. A responsible-disclosure program IS published in HTML at
+    https://leadpages.com/security with a security@leadpages.com contact — it is
+    simply not mirrored to the machine-readable RFC 9116 location.
+- path: /.well-known/openid-configuration
+  standard: OpenID Connect Discovery
+  status: 404
+- path: /.well-known/api-catalog
+  standard: RFC 9727
+  status: 404
+- path: /.well-known/ai-plugin.json
+  standard: OpenAI plugin manifest (deprecated)
+  status: 404
+- path: /.well-known/agent.json
+  standard: A2A pre-0.3 legacy path
+  status: 404
+  note: Card is served at the canonical /.well-known/agent-card.json path instead.
+other_hosts:
+- host: https://mcp.leadpages.com
+  note: >-
+    MCP endpoint host. Resolves to the same Cloudflare origin as leadpages.com;
+    the OAuth protected-resource document names https://leadpages.com as the
+    single authorization server, so discovery is centralized on the apex.
+- host: https://api.leadpages.com
+  note: >-
+    The REST base URL published in the developer docs. DNS resolves to
+    ghs.googlehosted.com but the host does not complete a TLS handshake
+    (curl error 35), so no /.well-known/ probe was possible. See
+    lifecycle/leadpages-lifecycle.yml.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/.well-known/oauth-authorization-server', status: 200}
+  - {url: 'https://leadpages.com/.well-known/oauth-protected-resource', status: 200}
+  - {url: 'https://leadpages.com/.well-known/agent-card.json', status: 200}
+  - {url: 'https://leadpages.com/.well-known/security.txt', status: 404}
+  - {url: 'https://leadpages.com/.well-known/openid-configuration', status: 404}
+  - {url: 'https://leadpages.com/.well-known/api-catalog', status: 404}
+  - {url: 'https://leadpages.com/.well-known/ai-plugin.json', status: 404}

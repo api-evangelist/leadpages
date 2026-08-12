@@ -1,0 +1,166 @@
+generated: '2026-08-12'
+method: searched
+source: https://leadpages.com/developers/docs
+docs: https://leadpages.com/developers/docs
+scope: >-
+  Cross-cutting request/response semantics for the Leadpages REST API and MCP server,
+  assembled from the provider's own developer documentation and discovery documents.
+  Nothing here is derived from an OpenAPI, because Leadpages publishes none of its own —
+  see contract_discovery below.
+
+contract_discovery:
+  openapi_published: false
+  headline: >-
+    Leadpages documents a REST API in prose but publishes no machine-readable contract
+    of its own. The only OpenAPI reachable on its domain describes a different product.
+  the_trap:
+    url: https://leadpages.com/openapi.json
+    http_status: 200
+    content_type: application/json
+    parses_as: OpenAPI 3.1.0
+    operations: 20
+    rejected: true
+    reason: >-
+      The document is real and parses, but it is NOT the Leadpages API. It self-identifies
+      as info.title "htmlpub API", its only servers[] entry is https://htmlpub.com, its
+      contact is support@htmlpub.com, its terms point at https://htmlpub.com/terms, and its
+      bearer-key description says keys start with "hp_live_" and require a $15/mo Pro plan.
+      The Leadpages developer docs instead publish base https://api.leadpages.com, keys
+      prefixed "lp_", and a materially larger surface (eight categories including Blogs,
+      Analytics, Forms and Brand Kits, none of which appear in that spec). A client
+      following it would call htmlpub.com, not Leadpages.
+    why_it_is_served_here: >-
+      HTML Pub is Leadpages' sibling product on the same engine — the provider says so
+      itself in llms.txt ("Sibling Product: HTML Pub ... Same engine, no optimization
+      layer"), the shared Next.js bundle carries a brand switch reading
+      ("nova" === "nova" ? "nova_dashboard" : "htmlpub_dashboard"), template thumbnails on
+      the Leadpages homepage are served from an htmlpub-pages R2 bucket, and the Leadpages
+      GitHub org publishes htmlpub-mcp. The shared codebase serves HTML Pub's static
+      openapi.json from the Leadpages domain as well.
+    disposition: >-
+      Not saved to openapi/, and no artifact in this repo is derived from it. A prior
+      enrichment round attributed this spec to Leadpages and propagated it into 18 files;
+      all of those were discarded.
+  probes:
+  - {url: 'https://leadpages.com/openapi.json', status: 200, verdict: 'wrong owner — htmlpub API'}
+  - {url: 'https://leadpages.com/openapi.yaml', status: 404}
+  - {url: 'https://leadpages.com/swagger.json', status: 404}
+  - {url: 'https://api.leadpages.com/openapi.json', status: 0, verdict: 'TLS handshake fails'}
+  - {url: 'https://api.leadpages.io/openapi.json', status: 404}
+  - {url: 'https://leadpages.com/.well-known/api-catalog', status: 404}
+  graphql: {probed: false, reason: 'no /graphql surface documented or advertised'}
+  mcp: {probed: true, url: 'https://mcp.leadpages.com/mcp', status: 401, verdict: 'tools/list OAuth-gated'}
+
+authentication:
+  styles:
+  - {name: bearer-api-key, header: 'Authorization: Bearer lp_<key>', use: server-to-server}
+  - {name: oauth2-authorization-code-pkce, use: 'MCP and user-facing integrations'}
+  detail: authentication/leadpages-authentication.yml
+
+base_url:
+  documented: https://api.leadpages.com
+  documented_in: https://leadpages.com/developers/docs
+  reachable: false
+  probe: >-
+    api.leadpages.com resolves (CNAME ghs.googlehosted.com) but does not complete a TLS
+    handshake — curl exits 35 (SSL_ERROR_SYSCALL) and the domain-security probe records
+    https: false. Every worked example in the docs uses this host, so the published REST
+    quickstart cannot currently be executed as written.
+  hosts_that_do_answer:
+  - {host: 'https://leadpages.com', surfaces: ['/api/*', '/mcp', '/api/a2a', '/.well-known/*']}
+  - {host: 'https://mcp.leadpages.com', surfaces: ['/mcp']}
+
+url_design:
+  style: RESTful, resource-oriented
+  description_verbatim: RESTful design, JSON responses, predictable URLs
+  path_prefix: /api
+  resources: [pages, sites, assets, blogs, analytics, forms, custom-domains, brand-kits]
+  identifiers:
+    pages: slug-addressed (/api/pages/:slug)
+    sites: id-addressed (/api/sites/:id)
+    blogs: id-addressed (/api/blogs/:id)
+    domains: domain-addressed (/api/custom-domains/:domain)
+  id_prefixes:
+    observed: ['pg_ — page (from the documented 201 response example: "id": "pg_a1b2c3d4e5")']
+    note: Only the page prefix appears in published examples; others are not documented.
+
+media_types:
+  responses: application/json
+  request_uploads: multipart/form-data (documented for page creation)
+
+versioning:
+  scheme: none-published
+  note: >-
+    No version segment in any documented path, no version header, no dated release train.
+    The API is presented as unversioned. See lifecycle/leadpages-lifecycle.yml.
+
+idempotency:
+  supported: unknown
+  documented: false
+  note: >-
+    No idempotency key, header or retry-safety contract appears anywhere in the published
+    documentation, and there is no OpenAPI to inspect for an Idempotency-Key parameter.
+    Recorded as undocumented — NOT as absent, and deliberately NOT wired as an
+    Idempotency pointer in apis.yml, since nothing supports the claim.
+
+pagination:
+  documented: false
+  note: >-
+    List operations exist (list_pages, GET /api/pages, GET /api/assets) but no page-size,
+    cursor or offset parameter and no pagination envelope is documented.
+
+error_envelope:
+  documented: false
+  observed:
+    shape: '{"error": "<message>"}'
+    samples:
+    - {url: 'https://mcp.leadpages.com/mcp', status: 401, body: '{"error":"Unauthorized"}'}
+    - {url: 'https://leadpages.com/mcp', status: 401, body: '{"error":"Unauthorized"}'}
+    - {url: 'https://leadpages.com/api/a2a', status: 401, body: '{"error":"Unauthorized"}'}
+  note: >-
+    The only error shape observable anonymously is a flat single-string {"error": ...}
+    object on 401. Not RFC 9457 problem+json. No error-code reference or catalog is
+    published, so no errors/ artifact was written — there is nothing real to catalog.
+
+rate_limiting:
+  documented: false
+  detail: rate-limits/leadpages-rate-limits.yml
+
+request_tracing:
+  request_id_header: not-documented
+
+metering:
+  unit: AI credits
+  note: >-
+    Consumption is metered in AI credits per month by plan, with paid top-up packs. The
+    agent card flags agents:chat as spending org AI credits. See
+    plans/leadpages-plans-pricing.yml.
+
+agent_semantics:
+  robots_txt: https://leadpages.com/robots.txt
+  ai_crawlers_allowed: [GPTBot, ClaudeBot, PerplexityBot, Applebot-Extended]
+  disallowed_paths: [/dashboard/, /admin/, /api/, /auth/, /edit/, /nova/, /playground/, /_next/]
+  note: >-
+    Named AI crawlers are explicitly allowed on public content with the same disallow list
+    as general crawlers — an opt-in posture rather than a blanket block. The /_next/
+    disallow is why the full 47-tool MCP list is not publicly enumerable.
+  human_approval: >-
+    The A2A card requires an explicit confirmation round-trip before decide_proposal
+    executes, and states that governance rules can lock a resource so no agent can mutate
+    it even with approval.
+
+cross_links:
+  authentication: authentication/leadpages-authentication.yml
+  scopes: scopes/leadpages-scopes.yml
+  lifecycle: lifecycle/leadpages-lifecycle.yml
+  rate_limits: rate-limits/leadpages-rate-limits.yml
+  webhooks: asyncapi/leadpages-webhooks.yml
+  plans: plans/leadpages-plans-pricing.yml
+
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/developers/docs', status: 200}
+  - {url: 'https://leadpages.com/developers/mcp', status: 200}
+  - {url: 'https://leadpages.com/robots.txt', status: 200}
+  - {url: 'https://leadpages.com/openapi.json', status: 200}

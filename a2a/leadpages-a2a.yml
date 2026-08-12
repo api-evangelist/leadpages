@@ -1,0 +1,73 @@
+generated: '2026-08-12'
+method: probed
+source: https://leadpages.com/.well-known/agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: leadpages.com
+conformance:
+  spec: A2A 1.0.0
+  grade: near-conformant
+  protocol_version: 0.3.0
+  preferred_transport: null
+  deviations:
+  - no-preferredTransport
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  note: >-
+    Passes every A2A 1.0.0 hard check — capabilities is an object, protocolVersion
+    is present (0.3.0), and skills is an array of five fully described skills.
+    Graded near-conformant only because the optional preferredTransport field is
+    absent; defaultInputModes and defaultOutputModes are both present.
+card:
+  name: "Converted — Campaigns Agent Team"
+  url: https://leadpages.com/api/a2a
+  version: 1.0.0
+  skills: 5
+  file: leadpages-agent-card.json
+  security_schemes: [oauth2]
+  scopes:
+  - funnels:read
+  - agents:chat
+  - agents:approve
+skills:
+- id: team_chat
+  name: Talk with the funnel team
+  tags: [chat]
+- id: talk_to_agent
+  name: Talk with a specific agent
+  tags: [chat]
+- id: review_proposals
+  name: Review the team's proposals
+  tags: [read]
+- id: decide_proposal
+  name: Approve or dismiss a proposal
+  tags: [mutate]
+- id: funnel_overview
+  name: Funnel overview
+  tags: [read]
+ownership:
+  verified: true
+  note: >-
+    Served from leadpages.com (the provider's own registrable domain) and the
+    card's own url field points back to https://leadpages.com/api/a2a, so both
+    the discovery host and the declared agent endpoint are first-party.
+  brand_note: >-
+    The card's name field reads "Converted — Campaigns Agent Team" rather than
+    Leadpages. Recorded verbatim and not corrected: the document is served by
+    leadpages.com and targets leadpages.com endpoints, but the product name in
+    the card does not match the brand on the rest of the site.
+endpoint_probe:
+  url: https://leadpages.com/api/a2a
+  method: POST
+  http_status: 401
+  body: '{"error":"Unauthorized"}'
+  note: The declared A2A endpoint is live but OAuth-gated; no anonymous task surface.
+x-evidence:
+  fetched: '2026-08-12'
+  url: https://leadpages.com/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  bytes: 2851

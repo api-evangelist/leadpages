@@ -1,0 +1,232 @@
+generated: '2026-08-12'
+method: probed
+source: https://leadpages.com/pricing.md
+docs: https://leadpages.com/pricing
+note: >-
+  Read from the provider's own machine-readable pricing document at
+  https://leadpages.com/pricing.md (Content-Type text/markdown), which it links
+  from llms.txt as "Machine-readable pricing (for AI agents)". Values are quoted
+  verbatim from that document, which carries "Last updated: 2026-07-10".
+currency: USD
+billing_periods: [monthly, annual]
+annual_discount: 20%
+free_plan: false
+trial:
+  length_days: 7
+  credit_card_required: true
+  note: Billing starts when the trial ends unless canceled. Offered on every paid plan.
+traffic_caps: none
+plan_count: 6
+plan_lines:
+- name: Publishing
+  plans: [Starter, Pro, Business]
+  note: Publish pages, sites and blogs.
+- name: Optimization
+  plans: [Grow, Optimize, Scale]
+  note: Adds A/B testing, Smart Traffic, personalization and lead intelligence.
+plans:
+- name: Starter
+  line: Publishing
+  price_monthly: 10
+  price_annual_monthly: 8
+  price_annual_total: 96
+  currency: USD
+  api_access: false
+  limits:
+    pages: 5
+    custom_domains: 1
+    sites: 1
+    blogs: 0
+    storage: 1 GB
+    ai_credits_month: 4000
+    form_submission_history: 30 days
+    analytics_retention: none
+    integrations_active_connections: 0
+    seats: 1
+  features:
+    ab_testing: false
+    dynamic_text_replacement: false
+    lead_enrichment: false
+    smart_traffic: false
+    heatmaps: false
+  note: Per-form webhooks included; connecting a third-party app requires Pro.
+- name: Pro
+  line: Publishing
+  price_monthly: 29
+  price_annual_monthly: 23
+  price_annual_total: 276
+  currency: USD
+  api_access: true
+  limits:
+    pages: 25
+    custom_domains: 1
+    sites: 1
+    blogs: 1
+    storage: 5 GB
+    ai_credits_month: 12000
+    form_submission_history: 30 days
+    analytics_retention: 90 days
+    integrations_active_connections: 5
+    seats: 1
+  features:
+    ab_testing: false
+    dynamic_text_replacement: false
+    lead_enrichment: false
+    smart_traffic: false
+    heatmaps: false
+- name: Business
+  line: Publishing
+  price_monthly: 49
+  price_annual_monthly: 39
+  price_annual_total: 468
+  currency: USD
+  api_access: true
+  limits:
+    pages: 50
+    custom_domains: 2
+    sites: 2
+    blogs: 2
+    storage: 10 GB
+    ai_credits_month: 20000
+    form_submission_history: retained while subscribed
+    analytics_retention: 1 year
+    integrations_active_connections: 5
+    seats: 1
+  features:
+    ab_testing: false
+    lead_export: true
+    dynamic_text_replacement: false
+    smart_traffic: false
+    heatmaps: false
+- name: Grow
+  line: Optimization
+  price_monthly: 99
+  price_annual_monthly: 79
+  price_annual_total: 948
+  currency: USD
+  api_access: true
+  limits:
+    pages: unlimited
+    custom_domains: 4
+    sites: 4
+    blogs: 3
+    storage: 15 GB
+    ai_credits_month: 40000
+    form_submission_history: retained while subscribed
+    analytics_retention: 1 year
+    integrations_active_connections: 5
+    brand_kits: 3
+    seats: 1
+  features:
+    ab_testing: true
+    ab_testing_note: manual 2-way A/B split; 3+ variants and Smart Traffic require Optimize
+    dynamic_text_replacement: true
+    lead_enrichment: true
+    ip_resolution: true
+    icp_matching: true
+    smart_traffic: false
+    heatmaps: false
+  overage:
+    additional_seat: $20/mo per seat
+- name: Optimize
+  line: Optimization
+  price_monthly: 199
+  price_annual_monthly: 159
+  price_annual_total: 1908
+  currency: USD
+  api_access: true
+  limits:
+    pages: unlimited
+    custom_domains: 6
+    sites: 6
+    blogs: 5
+    storage: 25 GB
+    ai_credits_month: 80000
+    form_submission_history: retained while subscribed
+    analytics_retention: 2 years
+    integrations_active_connections: 10
+    brand_kits: 5
+    seats: 3
+  features:
+    ab_testing: true
+    ab_testing_note: "A/B and multivariate, up to 4 variants (A/B/C/D)"
+    smart_traffic: true
+    heatmaps: true
+    auto_personalization: true
+    dynamic_text_replacement: true
+    lead_enrichment: true
+    ip_resolution: true
+    icp_matching: true
+  overage:
+    additional_seat: $20/mo per seat
+- name: Scale
+  line: Optimization
+  price_monthly: 399
+  price_annual_monthly: 319
+  price_annual_total: 3828
+  currency: USD
+  api_access: true
+  limits:
+    pages: unlimited
+    custom_domains: 10
+    sites: 10
+    blogs: 10
+    storage: 50 GB
+    ai_credits_month: 160000
+    form_submission_history: retained while subscribed
+    analytics_retention: 3 years
+    integrations_active_connections: 25
+    brand_kits: 10
+    seats: 10
+    client_workspaces: 5
+  features:
+    ab_testing: true
+    ab_testing_note: "A/B and multivariate, up to 4 variants (A/B/C/D)"
+    smart_traffic: true
+    heatmaps: true
+    auto_personalization: true
+    auto_optimization: true
+    cross_page_learning: true
+    revenue_optimization: true
+    team_rbac_and_audit_logs: true
+    dynamic_text_replacement: true
+    lead_enrichment: true
+    ip_resolution: true
+    icp_matching: true
+  overage:
+    additional_seat: $20/mo per seat
+    additional_client_workspace: $40/mo per workspace
+    dedicated_account_manager: included
+add_ons:
+- {name: Additional seat, price: $20/mo per seat, available_on: [Grow, Optimize, Scale]}
+- {name: Additional custom domain, price: $20/mo per domain, available_on: [all paid plans]}
+- {name: Additional client workspace, price: $40/mo per workspace, available_on: [Scale]}
+usage_packs:
+  unit: AI credits
+  packs:
+  - {credits: 2000, price: 2.50, per_1000: 1.25}
+  - {credits: 5000, price: 5.00, per_1000: 1.00}
+  - {credits: 15000, price: 12.00, per_1000: 0.80}
+  - {credits: 50000, price: 35.00, per_1000: 0.70}
+  - {credits: 150000, price: 90.00, per_1000: 0.60}
+discrepancies:
+- field: ai_credits_month
+  note: >-
+    The /developers/mcp plan table lists Grow 20,000 / Optimize 60,000 /
+    Scale 200,000 AI credits, while /pricing.md lists 40,000 / 80,000 / 160,000
+    for the same plans. Both are provider-published; the pricing document is the
+    machine-readable source and is used above. Recorded rather than reconciled.
+- field: storage
+  note: >-
+    /developers/mcp lists Grow 500 MB / Optimize 5 GB / Scale 50 GB; /pricing.md
+    lists 15 GB / 25 GB / 50 GB. Same conflict, recorded not reconciled.
+- field: blogs
+  note: >-
+    /developers/mcp lists Grow 1 blog; /pricing.md lists 3. Recorded not reconciled.
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/pricing.md', status: 200, content_type: 'text/markdown'}
+  - {url: 'https://leadpages.com/pricing', status: 200}
+  - {url: 'https://leadpages.com/llms.txt', status: 200}
+  raw: plans/leadpages-pricing.md

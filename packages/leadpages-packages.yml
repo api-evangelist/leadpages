@@ -1,0 +1,49 @@
+generated: '2026-08-12'
+method: searched
+source: public package registries + https://leadpages.com/developers/docs
+package_count: 0
+official_package_count: 0
+note: >-
+  No first-party Leadpages client library exists on any public registry, and the developer
+  documentation offers no SDK — it presents raw curl only. Recorded as a checked absence,
+  not an unchecked gap. No SDKs pointer is wired in apis.yml, because there is no SDK.
+packages: []
+registries_checked:
+- {registry: npm, queries: [leadpages, '@leadpages/sdk', leadpages-sdk, leadpages-api], result: 404, endpoint: 'https://registry.npmjs.org/<pkg>'}
+- {registry: pypi, queries: [leadpages, leadpages-api], result: 404, endpoint: 'https://pypi.org/pypi/<pkg>/json'}
+- {registry: rubygems, queries: [leadpages], result: not-found}
+- {registry: packagist, queries: [leadpages], result: not-found}
+- {registry: crates.io, queries: [leadpages], result: not-found}
+- {registry: nuget, queries: [leadpages], result: not-found}
+- {registry: maven-central, queries: [leadpages], result: not-found}
+- {registry: pkg.go.dev, queries: [leadpages], result: not-found}
+github_org:
+  url: https://github.com/LeadPages
+  verified_first_party: true
+  verified_by: 'org blog field = https://www.leadpages.com'
+  public_repos: 16
+  created: '2014-07-20'
+  note: >-
+    The org is real and first-party but ships no Leadpages API client. Its most recently
+    pushed repo is htmlpub-mcp (2026-07-13), an MCP server for the sibling brand HTML Pub —
+    not a Leadpages package. The only Leadpages-API-related repo, api-standards, was last
+    pushed 2016-03-09 and documents a long-superseded API generation.
+  recent_repos:
+  - {name: htmlpub-mcp, pushed: '2026-07-13', note: 'sibling brand HTML Pub, not Leadpages'}
+  - {name: leadpage-creator-agent, pushed: '2026-05-15', language: HTML, note: 'tutorial project, not a client library'}
+  - {name: loop-agent, pushed: '2026-04-10', language: TypeScript}
+  - {name: api-standards, pushed: '2016-03-09', note: 'LeadPages API standards documentation — stale by a decade'}
+integration_surface_instead:
+  note: >-
+    In place of SDKs, Leadpages distributes programmatic access through MCP client
+    configurations (Claude, ChatGPT, Cursor, Claude Code, Claude Desktop, n8n) and through
+    Paragon-brokered third-party integrations capped by plan tier.
+  see: mcp/leadpages-mcp.yml
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://registry.npmjs.org/leadpages', status: 404}
+  - {url: 'https://registry.npmjs.org/@leadpages/sdk', status: 404}
+  - {url: 'https://registry.npmjs.org/leadpages-sdk', status: 404}
+  - {url: 'https://pypi.org/pypi/leadpages/json', status: 404}
+  - {url: 'https://api.github.com/orgs/LeadPages', status: 200}

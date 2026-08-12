@@ -42,5 +42,39 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AI Landing Page Builder with A/B Testing & Heatm is a company surfaced via the API Evangelist harvest backlog (source: marketing-integration-graph) and added to the network as a stub for full-pipeline profiling.
-- https://leadpages.com/
+Leadpages is an AI web platform with built-in conversion optimization, part of the Redbrick family of
+brands. It builds and hosts landing pages, multi-page sites and blogs that optimize themselves through
+A/B testing, Smart Traffic variant routing, heatmaps, dynamic text replacement and personalization.
+
+- Website: https://leadpages.com/
+- Developer portal: https://leadpages.com/developers
+- API documentation: https://leadpages.com/developers/docs
+- MCP documentation: https://leadpages.com/developers/mcp
+
+## API surface
+
+| Surface | Endpoint | Auth | State |
+|---|---|---|---|
+| REST API | `https://api.leadpages.com` | Bearer `lp_` key, Pro plan and above | Documented; **host does not serve** (see below) |
+| MCP server | `https://mcp.leadpages.com/mcp` | OAuth 2.0 + PKCE, all plans | Live, 47 documented tools, `tools/list` OAuth-gated |
+| A2A agent | `https://leadpages.com/api/a2a` | OAuth 2.0 | Live, agent card published, 5 skills |
+| Webhooks | dashboard-configured | — | Advertised; 3 event types named, no schemas published |
+
+## Notes on this profile
+
+**Leadpages publishes no OpenAPI of its own.** The document served at
+`https://leadpages.com/openapi.json` returns 200 and parses as OpenAPI 3.1.0, but it describes
+**HTML Pub** — a sibling brand on the same engine — with `servers[]` of `https://htmlpub.com`,
+`hp_live_` key prefixes and `support@htmlpub.com` as contact. It is not the Leadpages API and nothing
+in this repo is derived from it. See `conventions/leadpages-conventions.yml` for the full evidence.
+
+**The documented REST base URL does not resolve to a working endpoint.** `api.leadpages.com` CNAMEs to
+`ghs.googlehosted.com` and does not complete a TLS handshake, so the published REST quickstart cannot
+be run as written. See `lifecycle/leadpages-lifecycle.yml`.
+
+**The status page is provisioned but inactive.** `status.leadpages.com` redirects to
+`leadpages.statuspage.io/inactive`.
+
+What Leadpages does publish unusually well is its OAuth and agent discovery stack: RFC 8414
+authorization-server metadata, RFC 9728 protected-resource metadata, PKCE, dynamic client
+registration, an A2A agent card, and a substantive `llms.txt` with a machine-readable `pricing.md`.

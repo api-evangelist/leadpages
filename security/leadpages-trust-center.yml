@@ -1,0 +1,66 @@
+generated: '2026-08-12'
+method: searched
+probe: true
+source: https://leadpages.com/security
+url: https://leadpages.com/security
+note: >-
+  Leadpages publishes a security page rather than a dedicated trust center — there is
+  no trust.leadpages.com, no control portal and no downloadable evidence pack. The page
+  does describe practices, infrastructure and a responsible-disclosure program in
+  detail, so it is captured here as the trust surface.
+certifications:
+- name: SOC 2 Type II
+  status: in-progress
+  claim_verbatim: >-
+    We are actively pursuing SOC 2 Type II certification. Our security controls are
+    designed to meet the Trust Service Criteria for security, availability, and
+    confidentiality.
+  note: >-
+    IMPORTANT — this is a stated intent, NOT a held certification. The automated
+    keyword probe recorded "SOC 2" as a certification; that has been corrected here
+    against the page text. No report, auditor or observation period is published.
+- name: GDPR
+  status: claimed-compliant
+  claim_verbatim: >-
+    We support data subject access requests, right to deletion, and data portability.
+    Our infrastructure and data processing practices meet GDPR requirements.
+  supporting_page: https://leadpages.com/legal/gdpr
+not_claimed:
+- ISO 27001
+- PCI DSS
+- HIPAA
+- FedRAMP
+- CSA STAR
+practices:
+- {area: encryption_in_transit, detail: HTTPS with TLS 1.3 on every page, custom domain and API endpoint; free SSL auto-provisioned for custom domains}
+- {area: encryption_at_rest, detail: AES-256; database backups, file storage and sensitive fields encrypted independently with managed keys}
+- {area: authentication, detail: OAuth 2.0 and bearer tokens for API and MCP integrations; credentials not shared with third-party tools or AI agents}
+- {area: content_safety, detail: every page scanned for malicious content on publish; phishing, malware and abuse flagged before reaching visitors}
+- {area: ddos, detail: all traffic routed through Cloudflare global CDN for DDoS mitigation, rate limiting and bot management at the edge}
+- {area: audits, detail: regular internal security reviews and vulnerability assessments; dependencies continuously monitored for known vulnerabilities}
+infrastructure:
+  cdn: Cloudflare, 330+ edge locations
+  hosting: AWS — ECS Fargate, Aurora Serverless, ElastiCache
+  database: PostgreSQL with encryption at rest, automated daily backups, point-in-time recovery
+  object_storage: Cloudflare R2 (encrypted)
+  uptime_sla: 99.9%
+  edge_response_time: <50ms
+data_handling:
+  third_party_sharing: >-
+    States data is never sold or shared with third parties for marketing purposes;
+    shared only with infrastructure providers (AWS, Cloudflare) as necessary to operate
+    the service, under contractual protection.
+  data_residency: AWS Aurora (region not published)
+contacts:
+  security: security@leadpages.com
+  privacy: privacy@leadpages.com
+  support: support@leadpages.com
+evidence:
+- source: https://leadpages.com/security
+  http_status: 200
+  keywords: [soc 2, gdpr, tls 1.3, aes-256, responsible disclosure, uptime sla]
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/security', status: 200}
+  - {url: 'https://leadpages.com/legal/gdpr', status: 200}

@@ -1,0 +1,51 @@
+generated: '2026-08-12'
+method: searched
+source: https://leadpages.com/developers/docs
+docs: https://leadpages.com/developers/docs
+spec_type: none
+asyncapi_published: false
+note: >-
+  Leadpages advertises a webhook surface in its developer documentation but publishes no
+  AsyncAPI document and no webhook reference page. The three event types below are named
+  verbatim in the docs; their payload schemas, delivery semantics, retry policy and
+  signature scheme are NOT published anywhere reachable, and none has been invented here.
+  Endpoints are configured from the dashboard, which is behind login.
+surface:
+  transport: HTTP callback (webhook)
+  configuration: >-
+    "Configure endpoints from your dashboard." No public API for registering webhook
+    endpoints is documented.
+  availability: >-
+    Per-form webhooks are included on every plan including Starter; connecting a
+    third-party integration app requires Pro or above (per https://leadpages.com/pricing.md).
+events:
+- name: page.published
+  documented_as: pages are published
+  description: Fires in real time when a page is published.
+  payload_schema: not-published
+- name: lead.captured
+  documented_as: leads are captured
+  description: Fires in real time when a lead is captured.
+  payload_schema: not-published
+- name: form.submitted
+  documented_as: form submissions come in
+  description: Fires in real time when a form submission is received.
+  payload_schema: not-published
+event_count: 3
+verbatim_claim: >-
+  Webhooks — Get notified in real time when pages are published, leads are captured, or
+  form submissions come in. Configure endpoints from your dashboard.
+gaps:
+- no published payload schema for any event
+- no signing/verification scheme documented (no signature header named)
+- no retry or delivery-guarantee policy documented
+- no webhook event reference page (/developers/webhooks returns 404)
+- no AsyncAPI document
+probes:
+- {url: 'https://leadpages.com/developers/webhooks', status: 404}
+- {url: 'https://leadpages.com/developers/docs/webhooks', status: 404}
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/developers/docs', status: 200}
+  - {url: 'https://leadpages.com/pricing.md', status: 200}

@@ -1,0 +1,47 @@
+generated: '2026-08-12'
+method: searched
+source: https://leadpages.com/developers/docs
+docs: https://leadpages.com/developers/docs
+limit_count: 0
+note: >-
+  Leadpages publishes no API rate limits. The developer documentation, the MCP
+  documentation and the machine-readable pricing document were all read end to end and
+  none names a request ceiling, a window, a burst allowance, a 429 response, or any
+  RateLimit-* / X-RateLimit-* / Retry-After response header. An honest zero: limits are
+  undocumented, not confirmed absent.
+limits: []
+response_headers:
+  documented: []
+  observed: []
+  note: >-
+    No rate-limit headers could be observed either. Every API surface reachable
+    anonymously (mcp.leadpages.com/mcp, leadpages.com/mcp, leadpages.com/api/a2a) returns
+    401 before any limit is applied, and the documented REST base api.leadpages.com does
+    not complete a TLS handshake, so no live unauthenticated response was available to
+    inspect.
+exhaustion_status_code: not-documented
+quotas_that_are_published:
+  note: >-
+    What Leadpages does publish is resource quotas per plan rather than request-rate
+    limits. These are capacity caps, not throttling, and are captured in
+    plans/leadpages-plans-pricing.yml.
+  dimensions:
+  - {name: AI credits per month, range: '4,000 (Starter) to 160,000 (Scale)', overage: paid top-up packs from $2.50}
+  - {name: pages, range: '5 (Starter) to unlimited (Grow and above)'}
+  - {name: storage, range: '1 GB (Starter) to 50 GB (Scale)'}
+  - {name: custom domains, range: '1 to 10', overage: '$20/mo per additional domain'}
+  - {name: integration active connections, range: '0 to 25'}
+  - {name: traffic, range: 'no traffic caps on any plan (explicit provider claim)'}
+edge_controls:
+  note: >-
+    The security page states all traffic routes through Cloudflare providing "DDoS
+    mitigation, rate limiting, and bot management at the edge" — edge protection, with no
+    developer-facing thresholds published.
+  source: https://leadpages.com/security
+x-evidence:
+  fetched: '2026-08-12'
+  probes:
+  - {url: 'https://leadpages.com/developers/docs', status: 200}
+  - {url: 'https://leadpages.com/developers/mcp', status: 200}
+  - {url: 'https://leadpages.com/pricing.md', status: 200}
+  - {url: 'https://mcp.leadpages.com/mcp', status: 401}

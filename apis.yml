@@ -1,19 +1,86 @@
 aid: leadpages
 name: Leadpages
-description: Leadpages is a company surfaced via the API Evangelist marketing integration graph — named
-  as an integration by 5 members of the programmable-marketing cohort — and added to the network as a
-  stub for full-pipeline profiling.
+description: >-
+  Leadpages is an AI web platform with built-in conversion optimization, part of the Redbrick family
+  of brands. It builds and hosts landing pages, multi-page sites and blogs that improve themselves
+  through A/B testing, Smart Traffic variant routing, click and scroll heatmaps, dynamic text
+  replacement and auto-personalization, with no traffic caps on any plan. For developers and agents it
+  publishes a REST API covering pages, sites, assets, blogs, analytics, forms, custom domains and brand
+  kits; a hosted Model Context Protocol server exposing 47 tools over OAuth 2.0 with PKCE; webhooks for
+  page-publish, lead-capture and form-submission events; and an A2A agent card describing a nine-agent
+  campaign team. Founded 2012 and rebuilt from scratch in 2026.
 url: https://raw.githubusercontent.com/api-evangelist/leadpages/refs/heads/main/apis.yml
+image: https://leadpages.com/og-image.png
 x-type: company
 x-source: harvest:marketing-integration-graph
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Landing Pages
+- Marketing
+- Conversion Optimization
+- A/B Testing
+- Website Builder
+- Lead Generation
+- Content Management
+- Agents
+- Analytics
+apis:
+- name: Leadpages REST API
+  description: >-
+    RESTful API covering the full Leadpages platform across eight documented endpoint categories —
+    Pages, Sites, Assets, Blogs, Analytics, Forms, Domains and Brand Kits — with JSON responses and
+    bearer-token authentication using lp_-prefixed API keys. Available on the Pro plan and above.
+  humanURL: https://leadpages.com/developers/docs
+  baseURL: https://api.leadpages.com
+  tags:
+  - Landing Pages
+  - Content Management
+  - Marketing
+  properties:
+  - type: Documentation
+    url: https://leadpages.com/developers/docs
+  - type: APIReference
+    url: https://leadpages.com/developers/docs
+  - type: Authentication
+    url: authentication/leadpages-authentication.yml
+  - type: Webhooks
+    url: asyncapi/leadpages-webhooks.yml
+- name: Leadpages MCP Server
+  description: >-
+    Hosted Model Context Protocol server exposing 47 tools across Pages, Sites, Assets, Blogs, Brand
+    Kit and Utility categories, letting AI assistants build, publish, edit and manage landing pages,
+    sites and blogs. Authenticates with OAuth 2.0 and PKCE — no API keys — and is included on every
+    plan, including the free trial.
+  humanURL: https://leadpages.com/developers/mcp
+  baseURL: https://mcp.leadpages.com/mcp
+  tags:
+  - Agents
+  - Landing Pages
+  - Content Management
+  properties:
+  - type: MCPServer
+    url: mcp/leadpages-mcp.yml
+  - type: Documentation
+    url: https://leadpages.com/developers/mcp
+  - type: OAuthScopes
+    url: scopes/leadpages-scopes.yml
+- name: Leadpages A2A Agent
+  description: >-
+    Agent2Agent endpoint for a nine-agent marketing team — Otto, Piper, Cash, Iris, Ray, Milo, Penn,
+    Vera and Cam — that watches campaigns, proposes optimizations and, with explicit approval,
+    executes changes against live ad accounts. Five skills covering team chat, per-agent chat,
+    proposal review, proposal approval and funnel overview, secured with OAuth 2.0.
+  humanURL: https://leadpages.com/developers
+  baseURL: https://leadpages.com/api/a2a
+  tags:
+  - Agents
+  - Marketing
+  properties:
+  - type: AgentCard
+    url: a2a/leadpages-a2a.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -22,6 +89,62 @@ maintainers:
 common:
 - type: Website
   url: https://leadpages.com/
+- type: DeveloperPortal
+  url: https://leadpages.com/developers
+- type: Documentation
+  url: https://leadpages.com/developers/docs
+- type: APIReference
+  url: https://leadpages.com/developers/docs
+- type: GettingStarted
+  url: https://leadpages.com/developers/docs#quickstart
+- type: Pricing
+  url: https://leadpages.com/pricing
+- type: SignUp
+  url: https://leadpages.com/free-trial
+- type: TermsOfService
+  url: https://leadpages.com/legal/terms
+- type: PrivacyPolicy
+  url: https://leadpages.com/legal/privacy
+- type: Support
+  url: https://leadpages.com/contact
+- type: Blog
+  url: https://leadpages.com/blog
+- type: GitHubOrganization
+  url: https://github.com/LeadPages
+- type: Security
+  url: https://leadpages.com/security
+- type: Compliance
+  url: https://leadpages.com/security
+- type: TrustCenter
+  url: security/leadpages-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/leadpages-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/leadpages-domain-security.yml
+- type: WellKnown
+  url: well-known/leadpages-well-known.yml
+- type: AgentCard
+  url: a2a/leadpages-a2a.yml
+- type: MCPServer
+  url: mcp/leadpages-mcp.yml
+- type: Authentication
+  url: authentication/leadpages-authentication.yml
+- type: OAuthScopes
+  url: scopes/leadpages-scopes.yml
+- type: LLMsTxt
+  url: llms/leadpages-llms.txt
+- type: Plans
+  url: plans/leadpages-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/leadpages-rate-limits.yml
+- type: Conformance
+  url: conformance/leadpages-conformance.yml
+- type: Lifecycle
+  url: lifecycle/leadpages-lifecycle.yml
+- type: Conventions
+  url: conventions/leadpages-conventions.yml
+- type: Webhooks
+  url: asyncapi/leadpages-webhooks.yml
 x-vouched-by:
 - Chili Piper
 - Drip
@@ -29,3 +152,8 @@ x-vouched-by:
 - Improvado
 - MailerLite
 x-vouch-count: 5
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
