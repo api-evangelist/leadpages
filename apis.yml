@@ -13,7 +13,7 @@ url: https://raw.githubusercontent.com/api-evangelist/leadpages/refs/heads/main/
 image: https://leadpages.com/og-image.png
 x-type: company
 x-source: harvest:marketing-integration-graph
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
