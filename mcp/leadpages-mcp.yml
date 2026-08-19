@@ -7,12 +7,10 @@ server:
   transport: http
   url: https://mcp.leadpages.com/mcp
   alternate_url: https://leadpages.com/mcp
-  alternate_url_note: >-
-    The RFC 9728 protected-resource document at
-    https://leadpages.com/.well-known/oauth-protected-resource names
-    "https://leadpages.com/mcp" as the resource, while the developer docs and every
-    published client snippet use https://mcp.leadpages.com/mcp. Both hosts answer
-    and both return 401 unauthenticated; both are recorded rather than picking one.
+  alternate_url_note: The RFC 9728 protected-resource document at https://leadpages.com/.well-known/oauth-protected-resource
+    names "https://leadpages.com/mcp" as the resource, while the developer docs and every published client
+    snippet use https://mcp.leadpages.com/mcp. Both hosts answer and both return 401 unauthenticated;
+    both are recorded rather than picking one.
   authentication:
     type: oauth2
     flow: authorization_code
@@ -25,10 +23,8 @@ server:
     note: Documented as "OAuth 2.0 with PKCE, no API keys needed".
   availability:
     plans: all plans including the 7-day free trial
-    note: >-
-      The docs state all plans include full access to every MCP tool; plans differ
-      only in resource limits. The /developers/mcp plan table shows Grow/Optimize/Scale
-      each with "All 47" tools.
+    note: The docs state all plans include full access to every MCP tool; plans differ only in resource
+      limits. The /developers/mcp plan table shows Grow/Optimize/Scale each with "All 47" tools.
   clients_documented:
   - Claude.ai (custom connector)
   - ChatGPT (Developer Mode apps, paid plan required)
@@ -39,81 +35,97 @@ server:
 tools:
   total_documented: 47
   enumerated_here: 9
-  enumeration_note: >-
-    The provider states the server exposes 47 tools and publishes per-category
-    counts. Only the "Pages" category is expanded in the server-rendered HTML; the
-    other five categories are rendered client-side from /_next/ chunks, which the
-    site's robots.txt disallows. Live enumeration via tools/list is OAuth-gated
-    (HTTP 401), so 38 tool names are NOT publicly recorded and are deliberately
-    left unlisted rather than guessed.
+  enumeration_note: The provider states the server exposes 47 tools and publishes per-category counts.
+    Only the "Pages" category is expanded in the server-rendered HTML; the other five categories are rendered
+    client-side from /_next/ chunks, which the site's robots.txt disallows. Live enumeration via tools/list
+    is OAuth-gated (HTTP 401), so 38 tool names are NOT publicly recorded and are deliberately left unlisted
+    rather than guessed.
   categories:
-  - {name: Pages, count: 9, enumerated: true}
-  - {name: Sites, count: 3, enumerated: false}
-  - {name: Assets, count: 8, enumerated: false}
-  - {name: Blogs, count: 19, enumerated: false}
-  - {name: Brand Kit, count: 5, enumerated: false}
-  - {name: Utility, count: 3, enumerated: false}
+  - name: Pages
+    count: 9
+    enumerated: true
+  - name: Sites
+    count: 3
+    enumerated: false
+  - name: Assets
+    count: 8
+    enumerated: false
+  - name: Blogs
+    count: 19
+    enumerated: false
+  - name: Brand Kit
+    count: 5
+    enumerated: false
+  - name: Utility
+    count: 3
+    enumerated: false
   published:
   - name: list_pages
     category: Pages
     description: List your published pages across all organizations.
   - name: create_page
     category: Pages
-    description: >-
-      Publish an HTML page. Auto-generates a slug by default, or provide a custom
-      slug (paid plans). Creates in your default organization unless organizationId
-      is specified.
+    description: Publish an HTML page. Auto-generates a slug by default, or provide a custom slug (paid
+      plans). Creates in your default organization unless organizationId is specified.
   - name: get_page
     category: Pages
-    description: >-
-      Get info about a published page. Returns metadata only by default. Set
-      includeContent=true for HTML. Use section to extract a specific part.
+    description: Get info about a published page. Returns metadata only by default. Set includeContent=true
+      for HTML. Use section to extract a specific part.
   - name: edit_page
     category: Pages
-    description: >-
-      Apply targeted text replacements to a page without rewriting the full HTML.
-      Much faster than update_page for small changes.
+    description: Apply targeted text replacements to a page without rewriting the full HTML. Much faster
+      than update_page for small changes.
   - name: update_page
     category: Pages
-    description: >-
-      Replace the full HTML content of a published page. For small changes, prefer
-      edit_page.
+    description: Replace the full HTML content of a published page. For small changes, prefer edit_page.
   - name: delete_page
     category: Pages
     description: Permanently delete a published page.
   - name: update_page_seo
     category: Pages
-    description: >-
-      Update SEO and social metadata for a page. Controls meta title, description,
-      Open Graph tags, Twitter cards, and search indexing.
+    description: Update SEO and social metadata for a page. Controls meta title, description, Open Graph
+      tags, Twitter cards, and search indexing.
   - name: set_page_favicon
     category: Pages
     description: Set or clear the favicon for a page using a library asset.
   - name: move_page_to_site
     category: Pages
-    description: >-
-      Move a page into a site collection, or unassign it. Optionally set it as the
-      site's index page.
+    description: Move a page into a site collection, or unassign it. Optionally set it as the site's index
+      page.
 introspection:
   attempted: true
   probes:
-  - {url: 'https://mcp.leadpages.com/mcp', method: 'tools/list', http_status: 401, body: '{"error":"Unauthorized"}'}
-  - {url: 'https://leadpages.com/mcp', method: 'tools/list', http_status: 401, body: '{"error":"Unauthorized"}'}
-  - {url: 'https://leadpages.com/mcp', method: 'initialize', http_status: 401, body: '{"error":"Unauthorized"}'}
+  - url: https://mcp.leadpages.com/mcp
+    method: tools/list
+    http_status: 401
+    body: '{"error":"Unauthorized"}'
+  - url: https://leadpages.com/mcp
+    method: tools/list
+    http_status: 401
+    body: '{"error":"Unauthorized"}'
+  - url: https://leadpages.com/mcp
+    method: initialize
+    http_status: 401
+    body: '{"error":"Unauthorized"}'
   result: gated
-  note: >-
-    Input schemas require authenticated introspection. No tool inputSchema is
-    recorded because none is publicly observable.
+  note: Input schemas require authenticated introspection. No tool inputSchema is recorded because none
+    is publicly observable.
 scopes:
   source: https://leadpages.com/.well-known/oauth-authorization-server
   see: scopes/leadpages-scopes.yml
 related:
-  - repo: https://github.com/LeadPages/htmlpub-mcp
-    note: >-
-      The Leadpages GitHub org publishes an MCP server for HTML Pub, its sibling
-      brand, not for Leadpages. Recorded as related context only — it is not the
-      Leadpages MCP server and nothing here is derived from it.
+- repo: https://github.com/LeadPages/htmlpub-mcp
+  note: The Leadpages GitHub org publishes an MCP server for HTML Pub, its sibling brand, not for Leadpages.
+    Recorded as related context only — it is not the Leadpages MCP server and nothing here is derived
+    from it.
 x-evidence:
   fetched: '2026-08-12'
   url: https://leadpages.com/developers/mcp
   http_status: 200
+deployment:
+  mode: remote
+  endpoint: https://mcp.leadpages.com/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
