@@ -10,6 +10,17 @@ description: >-
   page-publish, lead-capture and form-submission events; and an A2A agent card describing a nine-agent
   campaign team. Founded 2012 and rebuilt from scratch in 2026.
 url: https://raw.githubusercontent.com/api-evangelist/leadpages/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://leadpages.com/og-image.png
 x-type: company
 x-source: harvest:marketing-integration-graph
