@@ -172,6 +172,8 @@ common:
   url: conventions/leadpages-conventions.yml
 - type: Webhooks
   url: asyncapi/leadpages-webhooks.yml
+- type: Contact
+  url: mailto:press@leadpages.com
 x-vouched-by:
 - Chili Piper
 - Drip
