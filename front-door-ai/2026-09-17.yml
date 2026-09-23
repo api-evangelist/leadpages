@@ -1,0 +1,33 @@
+# Front Door AI Index — leadpages — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: leadpages
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: leadpages.com
+  final_host: leadpages.com
+  ownership: own
+  owner: leadpages
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 30
+  host_score: 30
+  density: 11.87
+  words: 2528
+  tiers:
+    agentic: 7
+    core: 23
+    model: 0
+  ambiguous: 16
+  top_terms:
+    AI: 23
+    smart: 11
+    AI agent: 3
+    agent: 3
+    prompts: 2
+    MCP: 1
+    agentic: 1
+    automation: 1
+    intelligence: 1
