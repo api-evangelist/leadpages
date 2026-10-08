@@ -230,3 +230,47 @@ x-evidence:
   - {url: 'https://leadpages.com/pricing', status: 200}
   - {url: 'https://leadpages.com/llms.txt', status: 200}
   raw: plans/leadpages-pricing.md
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - subscription
+  units: []
+  plans:
+  - name: Starter
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Business
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Grow
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Optimize
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
+  - name: Scale
+    access: other
+    model: hybrid
+    model_how: derived
+    units: []
+    periods: []
