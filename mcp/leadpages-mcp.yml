@@ -129,3 +129,25 @@ deployment:
   probe: gated
   checked: '2026-08-12'
   source: catalog MCP census
+rfc9728:
+  endpoint: https://mcp.leadpages.com/mcp
+  metadata_url: https://mcp.leadpages.com/.well-known/oauth-protected-resource/mcp
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://mcp.leadpages.com/mcp
+    authorization_servers:
+    - https://mcp.leadpages.com
+    scopes_supported:
+    - pages:read
+    - pages:write
+    - sites:read
+    - sites:write
+    - blogs:read
+    - blogs:write
+    - ads:read
+    - ads:write
+    bearer_methods_supported:
+    - header
