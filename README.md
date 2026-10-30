@@ -64,39 +64,132 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Leadpages is an AI web platform with built-in conversion optimization, part of the Redbrick family of
-brands. It builds and hosts landing pages, multi-page sites and blogs that optimize themselves through
-A/B testing, Smart Traffic variant routing, heatmaps, dynamic text replacement and personalization.
+Leadpages is an AI web platform with built-in conversion optimization, part of the Redbrick family of brands. It builds and hosts landing pages, multi-page sites and blogs that improve themselves through A/B testing, Smart Traffic variant routing, click and scroll heatmaps, dynamic text replacement and auto-personalization, with no traffic caps on any plan. For developers and agents it publishes a REST API covering pages, sites, assets, blogs, analytics, forms, custom domains and brand kits; a hosted Model Context Protocol server exposing 47 tools over OAuth 2.0 with PKCE; webhooks for page-publish, lead-capture and form-submission events; and an A2A agent card describing a nine-agent campaign team. Founded 2012 and rebuilt from scratch in 2026.
 
-- Website: https://leadpages.com/
-- Developer portal: https://leadpages.com/developers
-- API documentation: https://leadpages.com/developers/docs
-- MCP documentation: https://leadpages.com/developers/mcp
+**Areas:** Company · Landing Pages · Marketing · Conversion Optimization · A/B Testing · Website Builder · Lead Generation · Content Management · Agents · Analytics · A2A
 
-## API surface
+## Leadpages on APIs.io
 
-| Surface | Endpoint | Auth | State |
-|---|---|---|---|
-| REST API | `https://api.leadpages.com` | Bearer `lp_` key, Pro plan and above | Documented; **host does not serve** (see below) |
-| MCP server | `https://mcp.leadpages.com/mcp` | OAuth 2.0 + PKCE, all plans | Live, 47 documented tools, `tools/list` OAuth-gated |
-| A2A agent | `https://leadpages.com/api/a2a` | OAuth 2.0 | Live, agent card published, 5 skills |
-| Webhooks | dashboard-configured | — | Advertised; 3 event types named, no schemas published |
+Everything profiled for Leadpages is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/leadpages/](https://apis.io/providers/leadpages/)** — or go straight to one of the APIs or properties below.
 
-## Notes on this profile
+### APIs (3)
 
-**Leadpages publishes no OpenAPI of its own.** The document served at
-`https://leadpages.com/openapi.json` returns 200 and parses as OpenAPI 3.1.0, but it describes
-**HTML Pub** — a sibling brand on the same engine — with `servers[]` of `https://htmlpub.com`,
-`hp_live_` key prefixes and `support@htmlpub.com` as contact. It is not the Leadpages API and nothing
-in this repo is derived from it. See `conventions/leadpages-conventions.yml` for the full evidence.
+- [Leadpages REST API](https://apis.io/apis/leadpages/leadpages-rest-api/) — RESTful API covering the full Leadpages platform across eight documented endpoint categories — Pages, Sites, Assets, Blogs, Analytics, Forms, Domains and…
+- [Leadpages MCP Server](https://apis.io/apis/leadpages/leadpages-mcp-server/) — Hosted Model Context Protocol server exposing 47 tools across Pages, Sites, Assets, Blogs, Brand Kit and Utility categories, letting AI assistants build,…
+- [Leadpages A2A Agent](https://apis.io/apis/leadpages/leadpages-a2a-agent/) — Agent2Agent endpoint for a nine-agent marketing team — Otto, Piper, Cash, Iris, Ray, Milo, Penn, Vera and Cam — that watches campaigns, proposes…
 
-**The documented REST base URL does not resolve to a working endpoint.** `api.leadpages.com` CNAMEs to
-`ghs.googlehosted.com` and does not complete a TLS handshake, so the published REST quickstart cannot
-be run as written. See `lifecycle/leadpages-lifecycle.yml`.
+### Published properties
 
-**The status page is provisioned but inactive.** `status.leadpages.com` redirects to
-`leadpages.statuspage.io/inactive`.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-What Leadpages does publish unusually well is its OAuth and agent discovery stack: RFC 8414
-authorization-server metadata, RFC 9728 protected-resource metadata, PKCE, dynamic client
-registration, an A2A agent card, and a substantive `llms.txt` with a machine-readable `pricing.md`.
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Leadpages Webhooks](https://apis.io/asyncapis/leadpages/leadpages-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [leadpages](https://apis.io/servers/leadpages/leadpages/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Leadpages Authentication](https://apis.io/security/leadpages/leadpages-authentication/)
+- [Leadpages Domain Security](https://apis.io/security/leadpages/leadpages-domain-security/)
+- [Leadpages Trust Center](https://apis.io/security/leadpages/leadpages-trust-center/)
+- [Leadpages Vulnerability Disclosure](https://apis.io/security/leadpages/leadpages-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Leadpages Scopes](https://apis.io/scopes/leadpages/leadpages-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Leadpages Plans Pricing](https://apis.io/plans/leadpages/leadpages-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Leadpages Rate Limits](https://apis.io/rate-limits/leadpages/leadpages-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://leadpages.com/)
+- [Documentation](https://leadpages.com/developers/docs)
+- [Getting started](https://leadpages.com/developers/docs#quickstart)
+- [API reference](https://leadpages.com/developers/docs)
+- [Pricing](https://leadpages.com/pricing)
+- [Sign up](https://leadpages.com/free-trial)
+- [Support](https://leadpages.com/contact)
+- [Blog](https://leadpages.com/blog)
+- [Security](https://leadpages.com/security)
+- [Compliance](https://leadpages.com/security)
+- [Terms of service](https://leadpages.com/legal/terms)
+- [Privacy policy](https://leadpages.com/legal/privacy)
+- [GitHub](https://github.com/LeadPages)
+
+## API Evangelist rating
+
+**Kin Score 57.0** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 57.1 |
+| Access clarity | 92.1 |
+
+**Agent readiness 50.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | near-conformant (partial credit) |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/leadpages/](https://apis.io/providers/leadpages/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Leadpages: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/leadpages/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
